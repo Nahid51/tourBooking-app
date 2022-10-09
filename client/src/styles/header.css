@@ -123,6 +123,6 @@
     background-color: white;
 }
 
-.optionCounterButton:disabled {
+/* .optionCounterButton:disabled {
     cursor: not-allowed;
-}
+} */
