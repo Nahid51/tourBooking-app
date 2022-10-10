@@ -23,7 +23,7 @@ const Featured = () => {
                     className="featuredImg"
                 />
                 <div className="featuredTitles">
-                    <h1>Maldives</h1>
+                    <h1>South Lake Tahoe</h1>
                     <h2>563 properties</h2>
                 </div>
             </div>
@@ -38,6 +38,17 @@ const Featured = () => {
                     <h2>523 properties</h2>
                 </div>
             </div>
+            {/* <div className="featuredItem">
+                <img
+                    src="https://cf.bstatic.com/xdata/images/city/540x270/823860.webp?k=ad78ae3df378d8246dc7c5a486520020f40ea92ca3b08569514092bd1ec34750&o="
+                    alt=""
+                    className="featuredImg"
+                />
+                <div className="featuredTitles">
+                    <h1>Truckee</h1>
+                    <h2>523 properties</h2>
+                </div>
+            </div> */}
         </div>
     );
 };
