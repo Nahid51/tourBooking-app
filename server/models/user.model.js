@@ -4,7 +4,7 @@ const validator = require("validator");
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        require: [true, "Please provide your name."],
+        required: [true, "Please provide your name."],
         trim: true,
         minLength: [3, "Name must be at least 3 character."],
         maxLength: [100, "Name is too large."]
@@ -15,15 +15,15 @@ const userSchema = new mongoose.Schema({
         trim: true,
         lowercase: true,
         unique: true,
-        require: [true, "Email address is require."]
+        required: [true, "Email address is required."]
     },
     country: {
         type: String,
-        require: [true, "Please provide your country name"]
+        required: [true, "Please provide your country name"]
     },
     city: {
         type: String,
-        require: [true, "Please provide your country name"]
+        required: [true, "Please provide your country name"]
     },
     img: {
         type: String,
@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        require: [true, "Email address is require."],
+        required: [true, "Email address is required."],
         validate: {
             validator: (value) =>
                 validator.isStrongPassword(value, {
@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema({
     },
     confirmPassword: {
         type: String,
-        require: [true, "Please confirm your password."],
+        required: [true, "Please confirm your password."],
         validate: {
             validator: function (value) {
                 return value === this.password;
@@ -63,18 +63,16 @@ const userSchema = new mongoose.Schema({
         enum: ["active", "inactive", "blocked"],
         default: "active"
     },
-    role: {
-        type: String,
-        enum: ["user", "admin"],
-        default: "user"
+    isAdmin: {
+        type: Boolean,
+        default: false
     },
     address: String,
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpire: Date,
 }, {
-    timestamps: true,
-    _id: true
+    timestamps: true
 });
 
 const userModel = mongoose.model("User", userSchema);

@@ -2,15 +2,16 @@ const express = require("express");
 const router = express.Router();
 
 const { createHotel, getAllHotel, updateHotel, deleteHotel, getSingleHotel } = require("../controllers/hotel.controller.js");
-
-
-router.route("/")
-    .post(createHotel)
-    .get(getAllHotel)
+const { verifyAdmin } = require("../utils/verifyToken.js");
 
 router.route("/:id")
-    .put(updateHotel)
-    .delete(deleteHotel)
+    .put(verifyAdmin, updateHotel)
+    .delete(verifyAdmin, deleteHotel)
     .get(getSingleHotel)
+
+router.post("/create", verifyAdmin, createHotel)
+
+router.get("/", getAllHotel)
+
 
 module.exports = router;
