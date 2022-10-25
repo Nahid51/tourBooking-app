@@ -4,6 +4,7 @@ import { DateRange } from 'react-date-range';
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../context/SearchContext";
+import { AuthContext } from "../context/AuthContext";
 
 const Header = ({ type }) => {
     const [destination, setDestination] = useState("");
@@ -22,6 +23,7 @@ const Header = ({ type }) => {
         room: 1
     });
     const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
 
     const handleOption = (name, operation) => {
         setOptions(prev => {
@@ -71,7 +73,7 @@ const Header = ({ type }) => {
                         <p className="headerDesc">
                             Get rewards for your travels - unlock instant savings of 10% or more with a free tourbooking account
                         </p>
-                        <button className="headerBtn">Sign in / Register</button>
+                        {!user && <button className="headerBtn">Sign in / Register</button>}
 
                         <div className="headerSearch">
                             <div className="headerSearchItem">

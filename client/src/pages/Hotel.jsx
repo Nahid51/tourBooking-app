@@ -1,20 +1,24 @@
 import React, { useContext, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import MailList from '../components/MailList';
 import Navigation from '../components/Navigation';
+import { AuthContext } from '../context/AuthContext';
 import { SearchContext } from '../context/SearchContext';
 import useFetch from '../hooks/useFetch';
 import "../styles/hotel.css";
 
 const Hotel = () => {
     const location = useLocation();
+    const navigate = useNavigate()
     const id = location.pathname.split("/")[2];
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
 
     const { data, loading, error } = useFetch(`/hotel/find/${id}`);
+    const { user } = useContext(AuthContext);
 
     const { dates, options } = useContext(SearchContext);
     const MILISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -40,6 +44,15 @@ const Hotel = () => {
         }
 
         setSlideNumber(newSlideNumber)
+    };
+
+    const handleBooking = () => {
+        if (user) {
+            setOpenModal(true);
+
+        } else {
+            navigate("/login")
+        }
     };
 
     return (
@@ -105,7 +118,7 @@ const Hotel = () => {
                                 <h1>Perfect for a {days}-night stay!</h1>
                                 <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, accusamus.</span>
                                 <h2><b>${days * data.cheapestPrice * options.room}</b> ({days} nights)</h2>
-                                <button>Reserve or Book Now!</button>
+                                <button onClick={handleBooking}>Reserve or Book Now!</button>
                             </div>
                         </div>
                     </div>
