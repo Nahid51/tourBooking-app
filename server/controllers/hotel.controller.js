@@ -104,10 +104,7 @@ exports.countByType = async (req, res, next) => {
 exports.getSingleHotel = async (req, res, next) => {
     try {
         const singleHotel = await hotelModel.findById(req.params.id);
-        res.status(200).json({
-            message: "Single hotel founded successfully!",
-            result: singleHotel
-        });
+        res.status(200).json(singleHotel);
 
     } catch (error) {
         next(error)

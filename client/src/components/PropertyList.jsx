@@ -13,14 +13,13 @@ const images = [
 const PropertyList = () => {
 
     const { data, loading, error } = useFetch("/hotel/countByType");
-    console.log(data);
 
     return (
         <div className="propertyList">
             {loading ? "Loading... please wait" :
                 <>
                     {data && images.map((img, index) => (
-                        <div className="propertyListItem">
+                        <div className="propertyListItem" key={index}>
                             <img
                                 src={img}
                                 alt="Images"
