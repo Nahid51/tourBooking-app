@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import MailList from '../components/MailList';
 import Navigation from '../components/Navigation';
+import Reserved from '../components/Reserved';
 import { AuthContext } from '../context/AuthContext';
 import { SearchContext } from '../context/SearchContext';
 import useFetch from '../hooks/useFetch';
@@ -125,6 +126,7 @@ const Hotel = () => {
                     <MailList />
                     <Footer />
                 </div>}
+            {openModal && <Reserved setOpen={setOpenModal} hotelId={id} />}
         </div>
     );
 };
